@@ -1,0 +1,188 @@
+<%- include('../includes/head.ejs') %>
+    <h1 class="centered"> <b>Upload product</b> </h1>
+    <form class="product-form" action="http://localhost:3000/add-product" method="POST">
+        <div class="row">
+            <div class="col-25"><label for="name">Name of your product</label></div>
+            <div class="col-75"><input type="text" id="name" name="name" placeholder="product name.." required="required"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-25"><label for="checkboxes">Select tags for your product</label></div>
+            <div class="col-75" id="checkboxes">
+                <label for="a">
+              <input type="checkbox" name = "a" id="a" value="Clothing" style="font-family: 'Open Sans';"> clothing</label>
+                <label for="b">
+              <input type="checkbox" name = "b" id="b" value="Women's Clothing"/> women's clothing</label>
+                <label for="c">
+              <input type="checkbox" name = "c" id="c" value="Jewellery"/> jewellery</label>
+                <label for="d">
+              <input type="checkbox" name = "d" id="d" value="Footwear"/> footwear</label>
+                <label for="e">
+              <input type="checkbox" name = "e" id="e" value="Men's Clothing"/> men's clothing</label>
+                <label for="f">
+              <input type="checkbox" name = "f" id="f" value="Automotive"/> automotive</label>
+                <label for="g">
+              <input type="checkbox" name = "g" id="g" value="Necklaces"/> necklaces</label>
+                <label for="h">
+              <input type="checkbox" name = "h" id="h" value="Western Wear"/> western-wear</label>
+                <label for="i">
+              <input type="checkbox" name = "i" id="i" value="Beauty and Personal Care"/> care & beauty</label>
+                <label for="j">
+              <input type="checkbox" name = "j" id="j" value="Rings"/> rings</label>
+                <label for="k">
+              <input type="checkbox" name = "k" id="k" value="Accessories & Spare parts"/> accessories & spare parts</label>
+                <label for="l">
+              <input type="checkbox" name = "l" id="l" value="Home Decor & Festive Needs"/> festive & home decor</label>
+            </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-25"><label for="del">Select Mode of delivery</label></div>
+          <div class="col-75" id="del">
+
+
+            <input type="checkbox" id="del1" name="del1" value="0.08"  onclick="selectOnlyThis(this.id)" >
+            <label for="del1">Light Transport</label>
+            <input type="checkbox" id="del2" name="del2" value="0.125" onclick="selectOnlyThis(this.id)" > 
+            <label for="del2">Medium Transport</label>
+            <input type="checkbox" id="del3" name="del3" value="0.25" onclick="selectOnlyThis(this.id)" > 
+            <label for="del3">Heavy Transport</label>
+            <input type="checkbox" id="del4" name="del4" value="0" checked onclick="selectOnlyThis(this.id)" > 
+            <label for="del3">Free Transport</label>
+<!-- 
+          
+          <input type="radio" id="del1" name="del1" value="0.125">
+          <label for="del1">Bike</label>
+       
+        
+       
+          <input type="radio" id="del2" name="del2" value="0.5">
+          <label for="del2">Truck</label>
+       
+        
+       
+          <input type="radio" id="del3" name="del3" value="0.08">
+          <label for="del3">Flight</label> -->
+
+        </div>
+          
+        </div>
+        
+
+        <script>
+         
+        function selectOnlyThis(id) {
+          for (var i = 1;i <= 4; i++)
+          {
+              document.getElementById("del" + i).checked = false;
+          }
+          document.getElementById(id).checked = true;
+         
+
+      }
+    </script>
+
+    <script>
+
+      window.onload = select;
+
+    
+      
+      function select() {
+
+            if(document.getElementById("item_type").value == 'direct_sale'){
+
+              document.getElementById("hide").style.display = 'none';
+              document.getElementById("close_date").required = false;
+
+            }
+            else{
+
+              document.getElementById("hide").style.display = 'block';
+              document.getElementById("close_date").required = true;
+
+            }
+       
+            
+      
+       
+    }
+    </script>
+
+    <script>
+    function TDate() {
+      var UserDate = document.getElementById("close_date").value;
+      var ToDate = new Date();
+
+      if (new Date(UserDate).getTime() <= ToDate.getTime()) {
+            alert("The Date must be Bigger or Equal to today's date");
+
+            document.getElementById("close_date").value = new Date();
+
+
+
+
+            return false;
+      }
+      return true;
+    }
+
+    </script>
+
+
+
+
+
+        <div class="row">
+            <div class="col-25"><label for="description">Add product description</label></div>
+            <div class="col-75">
+                <textarea type="text" id="description" name="description" style="height:200px"></textarea>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-25"><label for="price">Add price, quantity and sale type</label></div>
+            <div class="col-20">
+                <input type="number" id="Price" name="price" required="required" style="height: 30px;" placeholder="in dollars">
+            </div>
+            &nbsp;
+            <div class="col-20">
+                <input type="number" name="quantity" id="quantity" required="required" style="height: 30px;">
+            </div>
+            &nbsp;
+            
+            <div class="col-15">
+                <select name="item_type" id="item_type" onchange="select()"  style="height: 50px;">
+                    <option value="auction" id = "hide1" selected>auctioning</option>
+                    <option value="direct_sale" id = "hide2"  >simple sale</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" id = "hide">
+            <div class="col-25"><label for="close_date">closing time</label></div>
+            <div class="col-75">
+                <input type="date" id="close_date" name="close_date" required="required" onchange="TDate()">
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-primary btn-block product-options" type="submit">Upload</button>
+        </div>
+    </form>
+
+    <script>
+        var expanded = false;
+
+        function showCheckboxes() {
+            var checkboxes = document.getElementById("checkboxes");
+            if (!expanded) {
+                checkboxes.style.display = "block";
+                expanded = true;
+            } else {
+                checkboxes.style.display = "none";
+                expanded = false;
+            }
+        }
+    </script>
+
+
+    <%- include('../includes/end.ejs') %>
