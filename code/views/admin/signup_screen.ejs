@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+    <br><br>
+    <div id='root'></div>
+    <div class="split left">
+        <div class="centered">
+            <h1 style="font-size: 50px; font-family: 'Lucida Sans Typewriter', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Welcome to eMercado!</h1>
+            <p style="font-size: 20px;font-weight: 100;">buy & sell just about anything, at the best prices in India</p>
+        </div>
+    </div>
+    <% if (message.length > 0 ) { %>
+        <div class="alert alert-danger" ><%=message%></div>
+      <% } %>
+    <div class="split right login-form" style="right: 0; margin-top: 30px;">
+        <div class="centered">
+            <form action="http://localhost:3000/signup-screen" class="product-form" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="name" placeholder="Username" required="required" name="name">
+                    <br>
+                    <input type="email" class="form-control" placeholder="Email" required="required" name="email" id="email">
+                    <br>
+                    <input type="password" class="form-control" placeholder="Enter password" required="required" name="password" id="password">
+                    <br>
+                    <input type="password" class="form-control" placeholder="Re-enter password" required="required" name="re_password" id="re_password">
+                    <br>
+                    <input type="number" class="form-control" placeholder="Phone Number" required="required" name="phone" id="phone">
+                    <br>
+                    <input type="checkbox" name="location" id="location" required="required">
+                    <label for="location">Permission to save your location</label>
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-block" style="font-family: 'Lucida Sans Typewriter', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%- include('../includes/end.ejs') %>
